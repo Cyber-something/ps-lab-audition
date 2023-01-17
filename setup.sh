@@ -1,13 +1,16 @@
 #!/bin/bash
 
+# the name of the victim user 
 USER="web"
 
-if ! grep -q $1 /etc/passwd
+# check if the user already exists
+if ! grep -q $USER /etc/passwd
 then
-    # User does not exist
-    useradd $USER
-    passwd $USER --stdin
+    # create the new user
+    useradd -m -s /bin/bash $USER
+   
+    # set a default passwrod
+    echo "web:l3tmein" | chpasswd
 fi
-
 
 

@@ -1,27 +1,20 @@
 # Linux Backdoors
 
+This lab setup is meant to simulate a security professional setting up a backdoor in order to maintain access to the compromised system even after the user changed the passwrod.
+
+
 ## Prerequisites
+
+To set up the lab first log in on the victim machine and execute the <code>setup.sh</code> script as sudo using the following command executee in the terminal
+```sh
+sudo ./setup.sh
+```
+The purpose of the script is to create a new user and set a default passwrod. To reset the lab and start again the <code>reset.sh</code> script can be used to remove the user, after which the <code>setup.sh</code> script can be executed again.
 
 Victim IP: **192.168.212.151**
 Host IP: **192.168.1.132**
-Prefered port: **4444**
 
-**Setup.sh** script
-```sh
-#!/bin/bash
-
-USER="web"
-
-if ! grep -q $USER /etc/passwd
-then
-    # User does not exist
-    useradd -m -s /bin/bash $USER
-    echo "Set the password to: l3tmein"
-    #passwd $USER
-    echo "web:l3tmein" | chpasswd
-fi
-```
-
+<br/>
 
 ## Instructions
 
@@ -55,4 +48,3 @@ passwd web
 # check that you cannot log in
 ``` 
 
-### Second part
